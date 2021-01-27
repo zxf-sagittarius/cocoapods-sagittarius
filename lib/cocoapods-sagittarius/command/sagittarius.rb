@@ -18,16 +18,37 @@ module Pod
     #       in the `plugins.json` file, once your plugin is released.
     #
     class Sagittarius < Command
-      self.summary = 'Short description of cocoapods-sagittarius.'
+      self.summary = 'custom cocoapods plugin -- sagittarius'
 
       self.description = <<-DESC
         Longer description of cocoapods-sagittarius.
       DESC
 
-      self.arguments = 'NAME'
-
+      # self.arguments = 'NAME'
+      self.arguments = [
+          CLAide::Argument.new('NAME', true),
+          CLAide::Argument.new('SOURCE', false)
+      ]
+      def self.options
+        [
+          ['--argument1', 'optional argument'],
+          ['--argument2', 'optional argument'],
+          ['--argument3', 'optional argument'],
+          ['--argument4', 'optional argument'],
+          ['--argument5', 'optional argument'],
+          ['--argument6', 'optional argument'],
+        ]
+      end
       def initialize(argv)
         @name = argv.shift_argument
+        @source = argv.shift_argument
+
+        @argument1 = argv.flag?('argument1')
+        @argument2 = argv.flag?('argument2')
+        @argument3 = argv.flag?('argument3')
+        @argument4 = argv.flag?('argument4')
+        @argument5 = argv.flag?('argument5')
+        @argument6 = argv.flag?('argument6')
         super
       end
 
